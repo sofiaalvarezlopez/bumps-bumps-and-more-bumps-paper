@@ -1,32 +1,42 @@
-\documentclass[twocolumn,linenumbers]{aastex631}
+\documentclass[twocolumn,twocolappendix,linenumbers]{aastex631}
 
 \usepackage{amssymb}
 \usepackage{amsmath}
 \usepackage{physics}
 \usepackage{orcidlink}
+\usepackage{acronym}
+\usepackage{xspace}
 
 \usepackage[dvipsnames]{xcolor}
 
+\input{acronyms}
 \newcommand{\comment}[1]{}
 \newcommand{\red}[1]{{\color{Red} #1}}
 \newcommand{\sa}[1]{{\bf\color{Thistle}SA: #1}}
+
+\newcommand{\PixelPop}{\textsc{PixelPop}\xspace}
+\newcommand{\PPMixture}{\textsc{PixelPop Mixture}\xspace}
+\newcommand{\Bsplines}{\textsc{B-Splines}\xspace}
+\newcommand{\BsplMixture}{\textsc{B-Splines}\xspace}
 
 
 \begin{document}
 
 
-\title{Bumps, bumps, and more bumps}
+\title{Bumps, bumps, and more bumps: Model-independent evidence for features in the primary mass distribution of the Binary Black Hole population}
 
-\author{Sofia Alvarez-Lopez\,\orcidlink{0009-0003-8040-4936}}\email{sofiaal@mit.edu}
+\author{Sofía Álvarez-López\,\orcidlink{0009-0003-8040-4936}}\email{sofiaal@mit.edu}
 \affiliation{LIGO Laboratory, Massachusetts Institute of Technology, Cambridge, MA 02139, USA}
 \affiliation{Kavli Institute for Astrophysics and Space Research, Massachusetts Institute of Technology, Cambridge, MA 02139, USA}
 \affiliation{Department of Physics, Massachusetts Institute of Technology, Cambridge, MA 02139, USA}
 
 \author{Ivan Juarez-Reyes}
-\noaffiliation
+\affiliation{Institute for Fundamental Science, University of Oregon, Eugene, OR 97403, USA}
+\affiliation{Department of Physics and Astronomy, University of Oregon, Eugene, OR 97403, USA}
 
 \author{Ben Farr}
-\noaffiliation
+\affiliation{Institute for Fundamental Science, University of Oregon, Eugene, OR 97403, USA}
+\affiliation{Department of Physics and Astronomy, University of Oregon, Eugene, OR 97403, USA}
 
 \author{Salvatore Vitale}
 \affiliation{LIGO Laboratory, Massachusetts Institute of Technology, Cambridge, MA 02139, USA}
@@ -39,13 +49,47 @@
 Abstract
 \end{abstract}
 
-
+%\input{introduction}
 \section{Introduction}
-\label{section: Introduction}
+\label{sec:introduction}
 
 This is the introduction.
 
+Potentially relevant papers:
+\begin{itemize}
+    \item TGMM model finding three subpops: \cite{Hussain:2026pfm}
+    \item Hierarchical mergers in the \(\sim15,46\,M_\odot\) regimes: \cite{Plunkett:2026pxt}; hierarchical mergers in the \(\sim15\,M_\odot\) regime: \cite{Tong:2025xir}, but see
+    \item Binned Gaussian process finding four subpops: \cite{Ray:2026qer}
+    \item Three subpops split by transitions in primary mass: \cite{Banagiri:2025dmy,Ray:2026uur}
+    \item Using pi-stroke to find subpops to strongly model, four subpops: \cite{Guttman:2026cnv}
+\end{itemize}
+
 \sa{Salvo said that for the (effective) spins from the PP mixture model we can just cite our $\chi_\mathrm{eff}$ paper.}
+
+\section{Methods}\label{sec:methods}
+
+We analyze 259 events from \acs{GWTC-5} with false-alarm rates below $1\,\mathrm{yr}^{-1}$~\citep{LIGOScientific:2026wfs}, using the individual-event posterior samples publicly released by the \acs{LVK} collaboration~\citep{ligo_scientific_collaboration_and_virgo_2026_20348005,ligo_scientific_collaboration_and_virgo_2026_20348006}. For events in \acs{GWTC-3} and earlier catalogs, we use posterior samples generated with the \textsc{IMRPhenomXPHM} waveform model~\citep{Pratten:2020ceb}. For events in \acs{GWTC-4} and \acs{GWTC-5}, we use \textsc{NRSur7dq4} samples when available and \textsc{IMRPhenomXPHM-SpinTaylor} samples otherwise. Although our waveform choices differ slightly from those of~\citet{LIGOScientific:2026wfs}, they increase the number of posterior samples per event from \textcolor{red}{1993} to 6913, reducing the parameter-estimation contribution to the log-likelihood variance. We do not expect the differences in waveform choices to significantly affect population inference.
+
+We infer population properties using the standard hierarchical Bayesian framework for gravitational-wave population inference~\citep{Mandel:2018mve,Thrane:2018qnx,Vitale:2020aaz,Essick:2023upv}. We account for selection effects by computing sensitivity estimates for \acs{BBH} systems over O1--O4b via a simulation campaign~\citep{Essick:2025zed,ligo_scientific_collaboration_2026_19500052}. We evaluate the population likelihood using Monte Carlo integration and limit the variance of the log-likelihood estimate to be less than one during inference~\citep{Tiwari:2017ndi,Essick:2022ojx,Talbot:2023pex,Heinzel:2025ogf}.
+
+We analyze the population using two mixture models, each combining parametric components with a flexible component described by either \PixelPop~\citep{Heinzel:2024jlc} or \Bsplines~\citep{Edelman:2021zkw,Edelman:2022ydv,Godfrey:2023oxb}. We refer to these models as \PPMixture and \BsplMixture, respectively. 
+
+\sa{TODO: Describe here main details of PP.}
+
+Although \PixelPop can model joint distributions of binary parameters~\citep{Heinzel:2024hva, Alvarez-Lopez:2025ltt, Alvarez-Lopez:2026ymo}, in this \emph{Letter} we use it to infer only the \ac{BBH} primary-mass distribution, allowing a direct comparison with the one-dimensional flexible distributions of \BsplMixture. We explore two-dimensional \PPMixture models in App.~\ref{app:2d-pp-mixture}.
+
+\sa{Will we consider two models? Should we write before this that we consider the 10 Msun peak parametrically (based on multiple results) so that the flexible models have more flexibility to do their thing (e.g., my chieff paper). }
+For each model, we write the comoving merger-rate density as
+\begin{equation}
+\mathcal{R}(\boldsymbol{\theta};z)
+= R_0\,(1+z)^\kappa\left[
+\xi\,p_{\rm c}(\boldsymbol{\theta})
++(1-\xi)\,p_{\rm peak}(\boldsymbol{\theta})
+\right],
+\end{equation}
+\sa{Is this also how splines are doing it, @Ivan?}
+
+
 
 \begin{acknowledgments}
 \sa{We thank friends for discussions.}
@@ -59,8 +103,13 @@ This research has made use of data or software obtained from the Gravitational W
 and is based upon work supported by NSF's LIGO Laboratory, which is a major facility fully funded by the National Science Foundation.
 \end{acknowledgments}
 
+\appendix 
 
-\bibliography{draft}{}
+\section{Model details}\label{app:model-details}
+
+\section{Two-dimensional \PPMixture models}\label{app:2d-pp-mixture}
+
+\bibliography{draft}
 \bibliographystyle{aasjournal}
 
 
