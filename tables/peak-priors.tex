@@ -1,0 +1,15 @@
+\begin{deluxetable*}{cccc}
+\tablecaption{Summary of \PPMixture and \BsplMixture model parameters and priors. \PPMixture models the peaks as linear-Gaussians, whereas \BsplMixture models the peaks as log-Gaussians.}
+\tablehead{
+\colhead{Parameter} & \colhead{Description} & \colhead{\PPMixture} & \colhead{\BsplMixture}
+}
+\label{tab:peak-parameters}
+\startdata
+$\mu_1$ & Location of the first peak & prior & $\mathcal{N}_{[\ln7, \ln15]}(\ln10, \ln5)$ \\
+$\sigma_1$ & Width of the first peak & prior & $\mathcal{N}_{[0.04, 0.2]}(0, 0.2)$ \\
+$\mu_2$ & Location of the second peak & prior & $\mathcal{N}_{[\ln28, \ln40]}(\ln35, \ln5)$ \\
+$\sigma_2$ & Width of the second peak & prior & $\mathcal{N}_{[0.04, 0.3]}(0, 0.2)$ \\
+$\xi_c, \lambda_i$ & \PPMixture mixing fractions & prior & - \\
+$\xi_c, \xi_i$ & \BsplMixture mixing fractions & - & ${\rm Dir}(\mathbf{\alpha}=(1,1,1))$ \\
+\enddata
+\end{deluxetable*}
