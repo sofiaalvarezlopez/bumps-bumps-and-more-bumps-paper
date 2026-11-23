@@ -26,11 +26,14 @@
 \renewcommand{\ij}[1]{{\color{Green} #1}}
 \newcommand{\PixelPop}{\textsc{PixelPop}\xspace}
 \newcommand{\PPMixture}{\textsc{PixelPop Mixture}\xspace}
-\newcommand{\Bsplines}{\textsc{B-Splines}\xspace}
-\newcommand{\BsplMixture}{\textsc{B-Splines Mixture}\xspace}
+% \newcommand{\Bsplines}{\textsc{B-Splines}\xspace}
+% \newcommand{\BsplMixture}{\textsc{B-Splines Mixture}\xspace}
+\newcommand{\Gwinferno}{\textsc{GWInferno}\xspace}
+\newcommand{\GwinfMixture}{\textsc{GWInferno Mixture}\xspace}
 \newcommand{\oneparpeak}{\textsc{One parametric peak}\xspace}
 \newcommand{\twoparpeaks}{\textsc{Two parametric peaks}\xspace}
 \newcommand{\gtwou}{\textsc{Gaussian+Two Uniform}\xspace}
+\newcommand{\Default}{\textsc{Default}\xspace}
 
 
 \newcommand{\Msun}{\ensuremath{\mathrm{M}_\odot}\xspace}
@@ -70,15 +73,11 @@ This is the abstract
 \section{Introduction}
 \label{sec:introduction}
 
-As of the \acf{GWTC-5}~\citep{LIGOScientific:2026sit,LIGOScientific:2026ifv,LIGOScientific:2026wfs}, the LIGO~\citep{TheLIGOScientific:2014jea}, Virgo~\citep{TheVirgo:2014hva}, and KAGRA~\citep{KAGRA:2020tym} collaborations (\acs{LVK}) have detected hundreds of merging stellar-mass \acp{BH} via their \ac{GW} signals.
-\ij{Analyses using a hierarchical Bayesian framework allow us to characterize the distributions of \ac{BBH} masses, spins, and redshifts at the population level}
-%Analyzing these observations jointly allows us to characterize the distributions of \ac{BBH} masses, spins, and redshifts
+As of the \acf{GWTC-5}~\citep{LIGOScientific:2026sit,LIGOScientific:2026ifv,LIGOScientific:2026wfs}, the LIGO~\citep{TheLIGOScientific:2014jea}, Virgo~\citep{TheVirgo:2014hva}, and KAGRA~\citep{KAGRA:2020tym} collaborations (\acs{LVK}) have detected hundreds of merging stellar-mass \acp{BH} via their \ac{GW} signals. Analyzing these observations collectively allows us to characterize the distributions of \ac{BBH} masses, spins, and redshifts
 ~\citep{LIGOScientific:2026ctl}, and to investigate the astrophysical processes that shape the population~\citep{Vitale:2020aaz,Thrane:2018qnx,Callister:2024cdx}.
 
 In particular, structure in the \ac{BBH} mass distribution may contain information about the evolution of \ac{BH} progenitors and the processes by which binaries are assembled~\citep{Mandel:2018hfr, vanSon:2022ylf}.
-Stellar and binary evolution can preferentially produce \acp{BH} at certain mass scales~\citep{Stevenson:2019rcw,vanSon:2022myr}.
-The superposition of subpopulations with different formation histories~\citep[e.g.,][]{Mapelli:2020vfa,Ivanova:2012vx,Bavera:2020uch,Gerosa:2021mno,Mapelli:2019bnp,Mandel:2021smh} may also introduce further structure in the overall mass distribution~\citep{Zevin:2020gbd,Galaudage:2026opk}.
-\ij{Is is useful/relevant to briefly mention the uncertainty in the predictions for the mass distributions? E.g. \citep{Vink:2011is, Merritt:2025spl, Torniamenti:2025abq, 2026arXiv260726147R}.}
+Stellar and binary evolution can preferentially produce \acp{BH} at certain mass scales~\citep{Stevenson:2019rcw,vanSon:2022myr}, although the predicted mass distributions are subject to significant theoretical uncertainties~\citep{Vink:2011is,Merritt:2025spl,Torniamenti:2025abq,2026arXiv260726147R}. Additional structure may also arise from the superposition of subpopulations with different formation histories~\citep[e.g.,][]{Mapelli:2020vfa,Ivanova:2012vx,Bavera:2020uch,Gerosa:2021mno,Mapelli:2019bnp,Mandel:2021smh,Zevin:2020gbd,Galaudage:2026opk}.
 Identifying and characterizing these features can help constrain the astrophysical origins of the \ac{BBH} population.
 
 Several features in the mass distribution have already been identified from~\ac{GW} observations, including a global peak near $10\,\Msun$ and a feature near $30\,\Msun$~\citep[e.g.,][]{LIGOScientific:2020kqk,KAGRA:2021duu,LIGOScientific:2026ctl,Edelman:2021zkw,Edelman:2022ydv,Farah:2023vsc,Godfrey:2023oxb,Rinaldi:2021bhm}.
@@ -91,110 +90,194 @@ For instance, heuristic parametric models describe the population using simple f
 However, parametric models make strong assumptions about the population, and their ability to capture additional structure is constrained by the assumed functional forms.
 As a result, the inferred distributions may be biased and subject to model misspecification~\citep{Romero-Shaw:2022ctb,Cheng:2023ddt}, potentially leading to model-driven conclusions.
 
-\ij{Weakly parametric} models, on the other hand, provide greater flexibility by making fewer assumptions about the functional form of the underlying population~\citep[e.g.,][]{Heinzel:2024jlc,Edelman:2021zkw,Edelman:2022ydv,Godfrey:2023oxb,Golomb:2022bon,Tiwari:2020vym,Rinaldi:2021bhm,Callister:2023tgi,Alvarez-Lopez:2025ltt,Ray:2024hos, Ray:2026qer}.
-\ij{Weakly parametric} models are therefore able to uncover features that may not be captured by more restrictive parametric models, although their greater flexibility comes at the expense of larger statistical uncertainties.
-The inferred structure can still depend on modeling choices, such as the priors controlling the smoothness and flexibility of the distribution.
+Agnostic models, on the other hand, provide greater flexibility by making fewer assumptions about the functional form of the underlying population~\citep[e.g.,][]{Heinzel:2024jlc,Edelman:2021zkw,Edelman:2022ydv,Godfrey:2023oxb,Golomb:2022bon,Tiwari:2020vym,Rinaldi:2021bhm,Callister:2023tgi,Alvarez-Lopez:2025ltt,Ray:2024hos, Ray:2026qer}.
+These models can therefore uncover features that may not be captured by more restrictive parametric models, although their greater flexibility comes at the expense of larger statistical uncertainties.
+The features recovered by agnostic models can also depend on the choice of priors, particularly those controlling the smoothness of the inferred distribution.
 
-Mixture models provide a way to combine parametric and \ij{weakly parametric} approaches by describing the population as a superposition of components with potentially different properties~\citep[e.g.,][]{Tiwari:2020vym,Godfrey:2023oxb,LIGOScientific:2025pvj,LIGOScientific:2026ctl,Rinaldi:2025evs,Alvarez-Lopez:inprep}.
+Mixture models provide a way to combine parametric and agnostic approaches by describing the population as a superposition of components with potentially different properties~\citep[e.g.,][]{Tiwari:2020vym,Godfrey:2023oxb,LIGOScientific:2025pvj,LIGOScientific:2026ctl,Rinaldi:2025evs,Alvarez-Lopez:inprep}.
 In particular, combining parametric and flexible components allows us to model prominent features explicitly, while allowing the flexible component to identify additional structure without prescribing its location or functional form~\citep{Godfrey:2023oxb,Alvarez-Lopez:2026ymo,Alvarez-Lopez:inprep}.
 %Moreover, different components can have distinct mass-ratio and spin distributions, allowing us to account for differences in the properties of the underlying subpopulations.
 
-In this \emph{Letter}, we use two different mixture models that combine parametric components with \PixelPop~\citep{Alvarez-Lopez:inprep} and \Bsplines~\citep{Edelman:2022ydv,Godfrey:2023oxb} to infer the \ac{BBH} primary-mass distribution.
-Despite substantially different assumptions about the parametric peaks, the flexible component, and the distributions of other binary parameters associated with each component, we find striking agreement between the two models. Our main findings are:
+In this \emph{Letter}, we use two different mixture models that combine parametric components with \PixelPop~\citep{Alvarez-Lopez:inprep} or \Gwinferno~\citep{Edelman:2022ydv,Godfrey:2023oxb} to infer the \ac{BBH} primary-mass distribution, $p(m_1)$.
+Despite substantially different assumptions about the parametric peaks, the flexible component, and the distributions of other source parameters, we find striking agreement between the two models. Our main findings are:
 
 \begin{enumerate}
     \item Both mixture models recover remarkably similar primary-mass distributions, including the locations and amplitudes of additional features beyond the global peak near $10\,\Msun$.
     This agreement suggests that the inferred structure is robust across substantially different population models, even without making specific assumptions about the additional features \textit{a priori}.
-    \item When modeling only the $10\,\Msun$ peak parametrically, both methods recover \textcolor{red}{additional features} near $20\,\Msun$ and $30\,\Msun$ without prescribing their functional forms.
-    Modeling the $30\,\Msun$ feature parametrically reduces the evidence for a peak but allows greater flexibility that results in a more prominent feature near $60\,\Msun$.\sa{Maybe rephrase this a bit.}
-    \item \textcolor{red}{Quantitative results.}
+    \item When modeling only the $10\,\Msun$ peak parametrically, both methods recover \textcolor{red}{additional features} near $20\,\Msun$ and $30\,\Msun$.
+    Modeling the $30\,\Msun$ feature as a separate component in the mixture model reduces the evidence for a peak but allows greater flexibility that results in a more prominent feature near $60\,\Msun$.
+    \item \textcolor{red}{Quantitative results from the derivatives and powerlaw tests.}
 \end{enumerate}
-
-% \sa{(Sofia) Potential way to write the intro}
-% \begin{itemize}
-%     \item GWTC-5.0 allows for more detailed studies.
-%     \item The primary mass distribution has a lot of info.
-%     \item Previous papers have found evidence for a peak at 10 Msun, and a peak/knee at 35 Msun. Others have found tentative/suggestive evidence for features at 20 and 60 Msun. Many of these were not on primary mass but on chirp mass, and most have been deemed model dependent and come back/leave. For instance, no evidence for these features was found in GWTC-5.0.
-%     \item Flexible population models provide a way to search for such structure without prescribing the locations or functional forms of individual features. Briefly explain B-splines and PixelPop.
-%     \item But we can use mixtures of flexible and parametrics: parametrics to model features we're sure are there, non-parametrics to model the remainder. 
-%     \item Mixtures are useful because of two things: first, we can give different distributions to different components. Second, modeling ``peaky''/dominant features might give more freedom to the flexible part to model the remainder.
-%     \item Using two different mixture models with little in common, we find: model-independent evidence for features at 20 and 60 in the primary mass distribution, plus an increased evidence for a peak at 35 Msun (not found in GWTC-5.0). \sa{Any other important findings?}
-% \end{itemize}
-
+ 
 \section{Methods}\label{sec:methods}
 
 We analyze 259 events from \acs{GWTC-5} with false-alarm rates below $1\,\mathrm{yr}^{-1}$~\citep{LIGOScientific:2026wfs}, using the individual-event posterior samples publicly released by the \acs{LVK} collaboration~\citep{ligo_scientific_collaboration_and_virgo_2026_20348005,ligo_scientific_collaboration_and_virgo_2026_20348006}.
 We infer population properties using the standard hierarchical Bayesian framework for gravitational-wave population inference~\citep{Mandel:2018mve,Thrane:2018qnx,Vitale:2020aaz,Essick:2023upv}.
 
 We model the \ac{BBH} primary-mass distribution as a mixture of parametric peaks and a flexible component (hereafter, the continuum).
-We describe the continuum using either \PixelPop~\citep{Heinzel:2024jlc} or \Bsplines~\citep{Edelman:2022ydv}.
-We refer to these models as \PPMixture~\citep{Alvarez-Lopez:inprep} and \BsplMixture~\citep{Godfrey:2023oxb}, respectively.
+We describe the continuum using either \PixelPop~\citep{Heinzel:2024jlc} or \Gwinferno~\citep{Edelman:2022ydv}.
+We refer to these models as \PPMixture~\citep{Alvarez-Lopez:inprep} and \GwinfMixture~\citep{Godfrey:2023oxb}, respectively.
 
 We consider two variants of each mixture model.
 In \oneparpeak, we model parametrically the global maximum of the $m_1$ distribution, located near $10\,\Msun$~\citep{LIGOScientific:2025pvj}.
 We use the continuum to infer the remaining structure, including the feature near $35\,\Msun$, without prescribing its functional form.
 In \twoparpeaks, we use Gaussian distributions centered around $10\,\Msun$ and $35\,\Msun$, allowing the continuum greater flexibility to resolve additional structure in $m_1$.
-We note that the peak prescriptions differ between \PPMixture and \BsplMixture, as detailed in App.~\ref{app:model-details}.
+We note that the peak prescriptions differ between \PPMixture and \GwinfMixture, as detailed in App.~\ref{app:model-details}.
 
+The descriptions of other source parameters also differ between \PPMixture and \GwinfMixture.
 In both \oneparpeak and \twoparpeaks, we consider separate mass-ratio ($q$) and spin distributions for each parametric peak and for the continuum, while all components share a common redshift ($z$) evolution.
-In \PPMixture, we model $q$, effective spin ($\chieff$), and the redshift evolution parametrically.
-In \BsplMixture, we instead use \Bsplines for $q$ and the component spins, and a modulated power law for the redshift evolution.
-These choices allow us to compare the inferred primary-mass distribution under substantially different assumptions about the remaining population properties.
+In \PPMixture, we model mass-ratio, effective spin ($\chieff$), and redshift parametrically.
+In \GwinfMixture, we instead use B-splines for $q$ and the component spins, and a modulated power law for the redshift evolution.
 We describe our modeling choices in detail in App.~\ref{app:model-details}.
-
-
-\section{Results}\label{sec:results}
 
 \begin{figure*}
 \centering
 \includegraphics[width=\linewidth]{plots/m1-ppd.pdf}
-\caption{The distribution of primary mass of the \ac{BBH} population inferred with \PPMixture (green) and \BsplMixture (pink) for the \oneparpeak and \twoparpeaks variants.  \textcolor{red}{Add more details.}
+\caption{The distribution of primary mass of the \ac{BBH} population inferred with \PPMixture (green) and \GwinfMixture (pink) for the \oneparpeak (top) and \twoparpeaks (bottom) variants. The 90\% credible interval for the GWTC-5.0 \Default model is shown in dotted black lines.  \textcolor{red}{Add more details, let me know if you have any suggestions!}
 }
 \label{fig:m1-ppd}
 \end{figure*}
 
-Figure~\ref{fig:m1-ppd} shows the primary-mass distribution inferred with the \oneparpeak (top) and \twoparpeaks (bottom) variants. The left panels show the total distribution, $p(m_1)$, inferred with \PPMixture and \BsplMixture, along with the distribution obtained with the \textsc{Default} BBH model from \ac{GWTC-5}~\citep{LIGOScientific:2026ctl}. The right panels show the individual components of both mixture models.
+\section{Results}\label{sec:results}
 
-In both variations, we find striking agreement between \PPMixture and \BsplMixture, despite the significantly different modeling assumptions we adopt for each model.
-In particular, the two methods recover similar locations and amplitudes for the additional features.
-With both methods, we recover the global peak near $10\,\Msun$ and additional structure at higher masses.
-These features are broadly consistent with the \ac{GWTC-5} \textsc{Default} \ac{BBH} model, although they are more clearly resolved by our mixture models.
+Figure~\ref{fig:m1-ppd} shows the primary-mass distribution inferred with the \oneparpeak (top) and \twoparpeaks (bottom) variants.
+The left panels show the total distribution, $p(m_1)$, inferred with \PPMixture and \GwinfMixture, along with the distribution obtained with the \textsc{Default} BBH model from \ac{GWTC-5}~\citep{LIGOScientific:2026ctl}. The right panels show the individual components of both mixture models.
 
-With \oneparpeak, the continuum recovers two excesses near $20\,\Msun$ and $30\,\Msun$, both of which appear as local maxima in the median total distribution.
-We also observe a change in slope near $60,\Msun$, although no distinct local maximum is apparent at this mass.
-When we model the $30\,\Msun$ feature parametrically with \twoparpeaks, it no longer appears as a distinct local maximum in the median total distribution.
-However, the feature near $60,\Msun$ becomes more prominent, which can be most seen in the continuum of both mixture models (see bottom right panel).
+In both variants, we find striking agreement between \PPMixture and \GwinfMixture, despite the significantly different modeling assumptions adopted for each model.
+Although our inferred distributions are broadly consistent with the \ac{GWTC-5} \textsc{Default} model within their credible intervals, both methods recover the global peak near \textcolor{red}{$10\,\Msun$}, as well as features with similar locations and amplitudes near $20\,\Msun$ and $60\,\Msun$. 
 
-We also find good agreement in the inferred mixing fractions.
-With \oneparpeak, we infer a continuum mixing fraction of \textcolor{red}{$\xi_c=0.36^{+0.21}_{-0.12}$} (90\% symmetric credible interval) and \textcolor{red}{$0.29^{+0.19}_{-0.13}$} for \PPMixture and \BsplMixture, respectively.
-With \twoparpeaks, the continuum fractions decrease to \textcolor{red}{$\xi_c=0.19^{+0.17}_{-0.09}$} and \textcolor{red}{$0.17^{+0.16}_{-0.08}$}, respectively.
-Both mixture models also recover consistent mixing fractions for the feature near $30\,\Msun$, with \textcolor{red}{$\xi_{30\,\Msun}=0.14^{+0.07}_{-0.05}$} and \textcolor{red}{$0.15^{+0.09}_{-0.06}$}, respectively.
+With \oneparpeak, the continuum recovers two excesses near $20\,\Msun$ and $30\,\Msun$, along with a less pronounced feature near $60\,\Msun$. When we model the $30\,\Msun$ feature parametrically with \twoparpeaks, the structure near $60\,\Msun$ becomes more prominent in the continuum of both mixture models (bottom right panel).
 
-To characterize the nature of the features recovered near $20$, $30$, and $60\,\Msun$ by both \PPMixture and \BsplMixture models in both \oneparpeak and \twoparpeaks variants, we examine the derivatives of $p(m_1)$ across posterior realizations.
-We calculate the posterior probability that these features correspond to local maxima in the primary-mass distribution and infer their locations when present.
-\textcolor{red}{We also investigate whether features without distinct maxima are associated with changes in slope.}
+We also find good agreement in the inferred mixing fractions between the two methods.
+With \oneparpeak, we infer a continuum mixing fraction of \textcolor{red}{$\xi_c=0.36^{+0.21}_{-0.12}$} (90\% symmetric credible interval) for \PPMixture and \textcolor{red}{$\xi_c=0.29^{+0.19}_{-0.13}$} for \GwinfMixture.
+With \twoparpeaks, the continuum fractions decrease to \textcolor{red}{$\xi_c=0.19^{+0.17}_{-0.09}$} and \textcolor{red}{$\xi_c =0.17^{+0.16}_{-0.08}$}, respectively.
+Both mixture models also recover consistent mixing fractions for the feature near $30\,\Msun$ in \twoparpeaks. We measure \textcolor{red}{$\xi_{30\,\Msun}=0.14^{+0.07}_{-0.05}$} (\PPMixture) and \textcolor{red}{$\xi_{30\,\Msun}=0.15^{+0.09}_{-0.06}$} (\GwinfMixture).
 
-\sa{To Do: Derivative analysis.}
+\begin{figure*}
+\centering
+\includegraphics[width=\linewidth]{plots/m1-ratio.pdf}
+\caption{\textcolor{red}{Ratio between our mixture models and \ac{GWTC-5}. }
+}
+\label{fig:m1-ratio}
+\end{figure*}
 
+\subsection{Evidence of excess}\label{subsec:evidence-excess}\nopagebreak[4]
+To quantify the significance of the features recovered by our mixture model with respect to the \Default \ac{BBH} primary mass model from \ac{GWTC-5} (hereafter, $p_{\mathrm{LVK}}(m_1)$), we compute the ratio $r(m_1)\equiv\ln[p(m_1)/p_{\mathrm{LVK}}(m_1)]$. 
+Figure~\ref{fig:m1-ratio} shows the posterior on $r(m_1)$ (top panels), and the probability that $r(m_1)>0$ (bottom panels), calculated by randomly pairing each \PPMixture and \Gwinferno draw with a \Default \ac{BBH} \ac{GWTC-5} draw~\citep{ligo_scientific_collaboration_2026_20292639}.
+Since the inferred features may have slightly different locations and widths across posterior draws, we also compare the probability assigned to selected mass intervals by integrating the distributions over these regions. (see Tab.~\ref{tab:integrated-fracs}). 
+Throughout this section, we quote values for \PPMixture (\GwinfMixture).
 
+Near $20\,\Msun$, both mixture models show suggestive evidence for an excess relative to the \ac{GWTC-5} \textsc{Default} \ac{BBH} distribution, preceded by a dip at slightly lower masses~\citep{Legred:2026oiz}.
+At $m_1\simeq19\,\Msun$, the probability that $p(m_1)>p_{\mathrm{LVK}}(m_1)$ is \textcolor{red}{$67\%$} (\textcolor{red}{$82\%$}) with \oneparpeak and \textcolor{red}{$77\%$} (\textcolor{red}{$94\%$}) with \twoparpeaks, whereas near $14\,\Msun$ the probability of a deficit, $p(m_1)<p_{\mathrm{LVK}}(m_1)$, is \textcolor{red}{$84\%$} (\textcolor{red}{$80\%$}) and \textcolor{red}{$88\%$} (\textcolor{red}{$91\%$}), respectively. \sa{Either here or in the paragraph below, emphasize that modeling the 35 Msun feature parametrically allows greater flexibility to the continuum, and larger excesses wrt to GWTC-5.0 are found.}
 
+\sa{Can also add that the slope is confidently negative following the 10 Msun peak.}
+\sa{Actually another important point is that the local power law test says almost 100\% probability of a dip with respect to a power law in Fig. 5.}
+
+Integrating over \textcolor{red}{$m_1 \in [17,22]\,\Msun$}, the probability of an excess relative to the \textsc{Default} model is \textcolor{red}{$71\%$} (\textcolor{red}{$79\%$}) with \oneparpeak and $86\%$ ($95\%$) with \twoparpeaks, while over \textcolor{red}{$m_1 \in [12,15]\,\Msun$} the probability of a dip is $87\%$ ($83\%$) and $87\%$ ($90\%$), respectively (see Tab.~\ref{tab:integrated-fracs}).
+
+\begin{table*}
+    \centering
+    \label{tab:integrated-fracs}
+    \begin{tabular}{lcccc}
+        \hline\hline
+        & \multicolumn{2}{c}{\textbf{\oneparpeak}} & \multicolumn{2}{c}{\textbf{\twoparpeaks}} \\
+        $m_1$ [\Msun] & \PPMixture & \GwinfMixture & \PPMixture & \GwinfMixture \\
+        \hline
+        $[12,15]$ & $13\%$ & $17\%$ & $13\%$ & $10\%$ \\
+        $[17,22]$ & $71\%$ & $79\%$ & $86\%$ & $95\%$ \\
+        $[43,52]$ & $20\%$ & $42\%$ & $19\%$ & $24\%$ \\
+        $[56,68]$ & $55\%$ & $59\%$ & $82\%$ & $87\%$ \\
+        \hline\hline
+    \end{tabular}
+        \caption{\textcolor{red}{Probability that $\int p(m_1)\,dm_1$ over each mass interval is larger than for
+    the GWTC-5.0 \textsc{Default} model.} \sa{Improve caption and also first column, need to say what the table is showing. Say that probability of dip is just 100\% - this value.}}
+\end{table*}
+
+Importantly, we can also evaluate how much the $m_1$ distribution changes between these two mass ranges in our mixture models relative to the \Default \ac{BBH} model.
+We find that the fraction of binaries within $m_1 \in [17,22]\,\Msun$ relative to $m_1 \in [12,15]\,\Msun$ is larger in our models than in the \textsc{Default} model in \textcolor{red}{$90\%$} (\textcolor{red}{$91\%$}) of posterior draws with \oneparpeak and $94\%$ ($97\%$) with \twoparpeaks.
+Together, these results suggest that the primary-mass distribution contains additional structure within $m_1 \in [12,22]\,\Msun$ that cannot be fully captured by the functional form of the \textsc{Default} model. \sa{Maybe a table for these numbers can also be useful, since they're quite significant. If not a table, maybe quote the numbers in the intro?}
+
+\sa{Talk about the dip between the 20 and 30 Msun features. We can say that it's probably filled by the extended 30 Msun Gaussian in \twoparpeaks, so $r\approx0$. We can say that the tentative dip is also }
+
+\sa{Talk about \twoparpeaks here.}
+
+% With \twoparpeaks, where this feature is
+% described by a parametric peak in both our models and the \textsc{Default} model, we find no
+% enhancement at $35\,\Msun$ ($22\%$ and $44\%$), and the evidence for a distinct local maximum
+% becomes weaker, even though both methods continue to recover an excess relative to a local
+% power law.
+
+\subsection{Feature or peak?}\label{subsec:peak-or-feature}
+
+With \oneparpeak, both mixture models find hints that the feature near $m_1 \in [30,35]\,\Msun$ may be more pronounced than in the \ac{GWTC-5} \textsc{Default} model, which already includes a parametric peak in this region.
+Near $35\,\Msun$, we find probabilities of $58\%$ ($72\%$) that our inferred distribution exceeds the \textsc{Default} model.
+We therefore investigate whether this feature could correspond to a local maximum, rather than a change in the slope of the primary-mass distribution, as suggested by~\cite{LIGOScientific:2026ctl}.
+To do so, we calculate the derivative of the primary-mass distribution across posterior realizations (App.~\ref{app:derivatives}).
+We find that just below $35,\Msun$, the probability of a positive slope reaches \textcolor{red}{$75\%$} (\textcolor{red}{$90\%$}), , compared with approximately \textcolor{red}{$50\%$} in the \textsc{Default} model.
+Above the feature, this probability decreases to nearly zero around $m_1\in[35,40],\Msun$, where the slope becomes negative in nearly all posterior realizations.
+We therefore find hints of a local maximum near $35,\Msun$, although the evidence is not yet conclusive.
+
+% Since the derivative analysis does not conclusively establish a local maximum, we also test for an excess relative to a local power law.
+% For each posterior realization, we use the average densities in two neighboring mass intervals to estimate a local power law, which we then compare with the inferred density in the central interval (App.~\ref{app:powerlaw}).
+% Near $30$–$35\,\Msun$, both mixture models recover a positive excess in nearly all posterior realizations, providing strong evidence for additional structure even if its morphology remains uncertain.
+
+Both mixture models confidently infer a negative slope over \textcolor{red}{$m_1 \in [35,45]\,\Msun$}, broadly consistent with the \textsc{Default} model (App.~\ref{app:derivatives}).
+However, Fig.~\ref{fig:m1-ratio} shows hints of a deficit near $m_1 \in [45,50]\,\Msun$, followed by an excess near $60\,\Msun$ relative to \Default \ac{BBH}, particularly with \twoparpeaks.
+
+Integrating over \textcolor{red}{$m_1 \in [56,68]\,\Msun$}, we find that our models recover a larger fraction of binaries in this region than the \textsc{Default} model in \textcolor{red}{$55\%$} (\textcolor{red}{$59\%$}) of posterior draws with \oneparpeak, increasing to \textcolor{red}{$82\%$} (\textcolor{red}{$87\%$}) with \twoparpeaks. \sa{Again: more flexibility in the continuum}
+
+We also investigate whether the feature near $60\,\Msun$ corresponds to a local maximum.
+With \twoparpeaks, the probability of a positive slope increases from nearly zero around \textcolor{red}{$m_1 \in [40,45]\,\Msun$} to approximately \textcolor{red}{$40\%$} near \textcolor{red}{$[55,60]\,\Msun$}, before decreasing again above \textcolor{red}{$65\,\Msun$} (App.~\ref{app:derivatives}).
+While we do not find conclusive evidence for a local maximum, the local-power-law test also favors a positive excess in this region, with probabilities of \textcolor{red}{$80\%$} (\textcolor{red}{$90\%$}) with \twoparpeaks.
+
+Similar to our analysis for the $20\,\Msun$ feature, we also compare how much the $m_1$ distribution changes between \textcolor{red}{$m_1 \in [43,52]\,\Msun$} and \textcolor{red}{$m_1 \in [56,68]\,\Msun$} in our mixture models relative to the \textsc{Default} model.
+We find that the fraction of binaries in the higher-mass interval relative to the lower-mass interval is larger in our models than in the \textsc{Default} model in \textcolor{red}{$74\%$} (\textcolor{red}{$67\%$}) of posterior draws with \oneparpeak and \textcolor{red}{$90\%$} (\textcolor{red}{$93\%$}) with \twoparpeaks.
+These results suggest that the primary-mass distribution may decline more steeply above $35\,\Msun$ before flattening near $60\,\Msun$, a behavior that is not fully captured by the smooth power-law component of the \textsc{Default} model.
 
 
 \section{Discussion}
 
 \begin{itemize}
+    \item We can also say something on the lines that we might need a better $p(m_1)$ model.
+    \item Maybe the features are not peaks if you marginalize $m_1$, maybe you need to look at different $q$ to see peaks, as Jack did. But that's okay here since we look at the marginal.
+    \item Our results still allow for a powerlaw (And even a dip!) at 20 and 60 Msun. This is most likely not the case because we still find suggestive evidence for peaks, but it's important to emphasize that we'll need more observations to determine the significance of these features and better characterize their shapes.
     \item Potential origin of these features?
 \end{itemize}
 
+We discuss the astrophysical interpretations of the features present in our inferred distributions, with a focus on the excesses at \(\sim20\,\Msun\) and \(\sim60\,\Msun\).
+
+\begin{figure*}
+\centering
+\includegraphics[width=\linewidth]{plots/q-chieff-ppd.pdf}
+\caption{\ij{Inferred mass ratio distributions and effective spin distributions for \oneparpeak (top) and \twoparpeaks (bottom) variants of \PPMixture (solid) and \GwinfMixture (dashed). As \GwinfMixture models in component spins, the effective spin distributions are sampled from the inferred spin component distributions.}
+}
+\label{fig:q-chieff-ppd}
+\end{figure*}
+
+Figure~\ref{fig:q-chieff-ppd} shows the mass ratio and effective spin distributions inferred with the \oneparpeak (top) and \twoparpeaks (bottom) variants.
+The \(10\,\Msun\) component is consistent with isolated binary formation, where progenitors preferentially pair near equal masses~\citep{Belczynski:2017gds,Giacobbo:2018etu,Wiktorowicz:2019dil}, though these \ij{estimates} are varied across a swath of population synthesis studies~\citep{Broekgaarden:2026bzj}.
+Recent studies have explored population models that attribute the \(10\,\Msun\) peak with a subpopulation of fail supernovae~\citep{Disberg:2023gel} where a deficit of mergers appears as a gap in the \(\sim(11-16)\,\Msun\) regime~\citep{Legred:2026oiz}, or as a result of a subpopulation of progenitors whose core compactness changes as a result of envelope removal in binary stripped stars~\citep{Schneider:2023mxe} that also contributes to the black hole mass spectrum past this gap~\citep{Galaudage:2026opk}.
+
+Evidence for a feature or a peak in the \(\sim30\Msun\) component is \ij{reduced} when modeling the primary mass distribution in \oneparpeak to \twoparpeaks, as shown in the top panel of Fig~\ref{fig:m1-ratio} where the excess relative to the GWTC-5.0 \Default BBH  is reduced in this regime.
+The presence of a peak at \(\sim30\Msun\) \ij{appears} to be sensitive to modeling choices, both in the choice of pairing function~\citep{Farah:2023swu,Roy:2025ktr} and mixture models~\citep{Banagiri:2025dmy,Li:2024jzi,Li:2023yyt}.
+The reduced evidence for a peak in the \twoparpeaks may also be a consequence of likelihood precision, as the addition of another component in the mixture model 
+% \citep{Corelli:2026thw}
+
+Mergers that populate past the failed supernovae or compactness gap may also originate from hierarchical mergers~\citep{Tong:2025xir,Farah:2026jlc,Plunkett:2026pxt}.
+Fig.~\ref{fig:m1-excess} hints at this feature, as the excess dips below the \ac{GWTC-5} \textsc{Default} \ac{BBH} model.
+
+Hierarchical mergers past \(m_1\sim45\,\Msun\) could populate the forbidden region predicted by pair instability supernovae~\citep{Tong:2025wpz, Antonini:2025ilj}.
+Plateau feature in \twoparpeaks around \(60\,\Msun\), suggestive of \cite{Antonini:2024het} and \cite{Antonini:2022vib}, and the CIs in the derivative analysis at this mass do not rule out a plateau-like feature that would indicate the \red{beginning of the contribution of} hierarchical mergers to the primary mass distribution.
 
 \section*{Acknowledgements}
 \begin{acknowledgments}
 \textcolor{red}{We thank friends for discussions.}
 %
-S.A.-L. is supported by the Andrei Sakharov Physics Fellowship Fund at MIT and NSF grant No. PHY-2045740. 
-
+S.A.-L. is supported by the Andrei Sakharov Physics Fellowship Fund at MIT. 
+%
+S.A.-L. and S.V. are partly supported by NSF grant No. PHY-2045740.
+%
 B.F. and I.J.R. acknowledge support from the National Science Foundation under grant PHY-2146528.
-\textcolor{red}{Please add your funding!}
 %
 The authors are grateful for computational resources provided by the LIGO Laboratory and supported by National Science Foundation Grants PHY-0757058 and PHY-0823459.
 %
@@ -250,7 +333,7 @@ In both cases, we apply the same $m_2$ truncation as for the $q$ distributions o
 We infer the \ac{BBH} merger rate $\mathcal{R}(m_1,q,\chieff;z)
 = R_0\,(1+z)^\kappa\, p_{\rm mix}^{\rm PP}(m_1,q,\chieff)$, where the redshift distribution evolves as a powerlaw with index $\kappa$~\citep{Fishbach:2018edt} and $R_0$ is the overall merger-rate scale.
 
-The full \BsplMixture model is given by
+The full \GwinfMixture model is given by
 \begin{widetext}
 \begin{equation}\label{eq:bspline-mixture}
 \begin{aligned}
@@ -259,9 +342,9 @@ The full \BsplMixture model is given by
 \end{aligned}
 \end{equation}
 \end{widetext}
-where \(\xi_c,\,\xi_i\) are the fractions of binaries in the continuum and peaks of the \BsplMixture, respectively.
-With the exception of the shared redshift distribution and the peaks in the primary mass distribution, every distribution is modeled \ij{by/with/using} cubic \Bsplines.
-The \BsplMixture models the component spins of the binary as independent and identically distributed (IID).
+where \(\xi_c,\,\xi_i\) are the fractions of binaries in the continuum and peaks of the \GwinfMixture, respectively.
+With the exception of the shared redshift distribution and the peaks in the primary mass distribution, every distribution is modeled with cubic B-splines.
+The \GwinfMixture models the component spins of the binary as independent and identically distributed (IID).
 \ij{Again}, for \oneparpeak, \(N_\mathrm{p}=1\); for \twoparpeaks, \(N_\mathrm{p}=2\).
 
 Each peak is modeled with a log-Gaussian in \(m_1\), where the log-means \(\ln(M/M_\odot)\) of the \(10\,M_\odot\) and \(30\,M_\odot\) peaks are constrained to \([\ln7,\ln15]\) and \([\ln28,\ln40]\) respectively.
@@ -273,10 +356,68 @@ p(z)=\frac{dV_c}{dz}(1+z)^{\kappa-1}\exp\mathcal{B}(z),
 where \(dV_c\) denotes the differential co-moving volume and \(\mathcal{B}(z)\) denotes a B-spline.
 
 \sa{@Ivan, can you please fill the rest of this section with the implementation details of the B-splines? Also make explicit the (many) differences with \PPMixture since it's really cool that despite the differences we get similar results.} 
-\ij{Some differences can be pointed to in a table containing priors on the peaks}
+\ij{Some differences can be pointed to in a table containing priors on the peaks?}
 
 \input{tables/peak-priors.tex}
 The priors on the parametric peaks are given in Table~\ref{tab:peak-parameters}.
+
+\section{Derivatives test}\label{app:derivatives}
+\sa{Copied from old version of the manuscript}
+To characterize the nature of the features recovered by our two models in both \oneparpeak and \twoparpeaks, we examine the slope of the primary-mass distribution, $\mathrm{d}\ln p(m_1)/\mathrm{d}\ln m_1$, across posterior realizations.
+We compute the derivative over an interval $\Delta \ln m_1 \approx 0.15\,\Msun$, and calculate the posterior probability that it is positive. Our result is robust to different choices of \textcolor{red}{$\Delta \ln m_1 \in [XX, YY]$}.
+
+\begin{figure*}
+\centering
+\includegraphics[width=\linewidth]{plots/m1-derivatives.pdf}
+\caption{\textcolor{red}{This is the derivative $d \ln p(m_1)/d \ln m_1$ and the probability that it is larger than zero. \sa{Need to edit legends of the plots to new GWInferno and also here we are testing the prob that the slope is gtr than 0.}}
+}
+\label{fig:m1-derivative}
+\end{figure*}
+
+Figure~\ref{fig:m1-derivative} shows the inferred derivatives of $p(m_1)$ (top panels) and the corresponding probabilities of a positive slope (bottom panels), for \oneparpeak (left) and \twoparpeaks (right) as a function of mass. We also show the same quantities for the \ac{GWTC-5} \textsc{Default} \ac{BBH} model for comparison.
+
+In both variants, the only clearly resolved transition from positive to negative slope occurs near $10\,\Msun$, corresponding to the global maximum of the primary-mass distribution. 
+At $\sim20\,\Msun$, however, both mixture models show \emph{suggestive} evidence for an additional local maximum. 
+With \oneparpeak, the posterior probability of a positive slope is approximately $\textcolor{red}{70\%}$ ($\textcolor{red}{85\%}$) near $\textcolor{red}{15\text{--}16\,\Msun}$, before decreasing to $\textcolor{red}{30\%}$ ($\textcolor{red}{10\%}$) by $\textcolor{red}{20\text{--}21\,\Msun}$, for \PPMixture (\GwinfMixture).
+We find a similar trend with \twoparpeaks, where the probability decreases from approximately $\textcolor{red}{80\%}$ ($\textcolor{red}{90\%}$) near $\textcolor{red}{16\,\Msun}$ to $\textcolor{red}{30\%}$ ($\textcolor{red}{10\%}$) near $\textcolor{red}{21\text{--}22\,\Msun}$. 
+
+%The evidence for a local maximum near $30\,\Msun$ is more sensitive to the modeling assumptions.
+% With \oneparpeak, both \PPMixture and \GwinfMixture show suggestive evidence for a local maximum. The probability of a positive slope is approximately $\textcolor{red}{75\%}$ and $\textcolor{red}{90\%}$, respectively, near $\textcolor{red}{27\text{--}29\,\Msun}$, decreasing to nearly zero by $\textcolor{red}{35\text{--}40\,\Msun}$.
+% This support is stronger than that found with the \ac{GWTC-5} \textsc{Default} \ac{BBH} model, for which the probability of a positive derivative is only $\textcolor{red}{50\%}$ near $\textcolor{red}{30\,\Msun}$ before decreasing to nearly zero.
+% With \twoparpeaks, however, the support for a positive slope reduces: the maximum probabilities of a positive slope below $30\,\Msun$ decrease to approximately $\textcolor{red}{45\%}$ and $\textcolor{red}{60\%}$ for \PPMixture and \GwinfMixture, respectively.
+
+The evidence for a local maximum near $30\,\Msun$ is more sensitive to the modeling assumptions. With \oneparpeak, both \PPMixture and \GwinfMixture show suggestive evidence for a local maximum, with probabilities of a positive slope of approximately $75\%$ and $90\%$, respectively, just below the feature, decreasing to nearly zero around $\textcolor{red}{35\text{--}40\,\Msun}$. This support is stronger than that found with the \ac{GWTC-5} \textsc{Default} \ac{BBH} model, for which the probability of a positive slope is $\sim50\%$ at best. With \twoparpeaks, however, these probabilities decrease to approximately $45\%$ and $60\%$, respectively.
+
+The weaker evidence for a local maximum with \twoparpeaks does not necessarily imply the absence of such a feature in the underlying astrophysical population.
+Instead, it may be a consequence of how the feature is modeled parametrically.
+In \PPMixture, the Gaussian component may broaden to accommodate additional structure rather than requiring more complex features in the \PixelPop continuum, consistent with an Occam's razor preference for a simpler description of the data~\citep{Alvarez-Lopez:inprep}.
+In \GwinfMixture, a peak-like feature near \(30\,\Msun\) is captured by the continuum component in \oneparpeak.
+By introducing a second peak component as in \twoparpeaks, we also introduce degeneracies in the regime where the continuum and \(30\,\Msun\) overlap, as shown in the bottom right panel of Fig. \ref{fig:m1-ppd}.
+% In B-splines, we also introduce more dimensions (since we have an additional component in 2 peaks with more ratio and spin PPDs. We are reaching the limit of variance cuts, so this broadening feature could be a result of a reduced maxL because of an increase in hyperparameters being sampled.
+% consequence on the limit of the likelihood uncertainty. 
+
+\begin{figure*}
+\centering
+\includegraphics[width=\linewidth]{plots/m1-excess.pdf}
+\caption{\textcolor{red}{This shows the excess relative to a power law for each hyperposterior draw. For each mass, I define three windows: one on the left \(L\), one on the right \(R\), and a central window \(C\). I then use \(L\) and \(R\) to calculate what a power law passing through \(C\) would look like and how much excess there is in each hyperposterior draw. The top row shows the posterior on the excess, while the bottom row shows the probability of a positive excess as a function of mass.}
+}
+\label{fig:m1-excess}
+\end{figure*}
+
+At higher masses, modeling the feature near $30\,\Msun$ parametrically allows the continuum to describe additional structure, resulting in an increased probability of a positive derivative near $60\,\Msun$. In both \PPMixture and \GwinfMixture, the probability of a positive slope increases from nearly zero at $\textcolor{red}{40\text{--}45\,\Msun}$ to approximately $\textcolor{red}{40\%}$ at $\textcolor{red}{55\text{--}60\,\Msun}$, before decreasing to $\textcolor{red}{5\text{--}10\%}$ above $\textcolor{red}{65\,\Msun}$. This is substantially higher than with \oneparpeak, where the maximum probabilities of a positive slope are $\textcolor{red}{20\%}$ and $\textcolor{red}{5\%}$ for \PPMixture and \GwinfMixture, respectively. While we do not find strong evidence for a local maximum near $60\,\Msun$, the inferred slopes suggest additional structure in this region.
+
+\section{Local power law test}\label{app:local-pl-test}
+
+The derivative analysis (App.~\ref{app:derivatives}), provides suggestive evidence for local maxima, but not all the features we recover necessarily correspond to distinct peaks.
+We therefore investigate these features further by testing for excesses relative to a power law in the primary-mass distribution.
+
+For each hyperposterior draw, we consider three neighboring mass intervals of equal width in $\ln m_1$ across the entire mass range. We compare the average density in the central interval with the mean of the densities in the two surrounding windows, which provides the expected probability density for a power law between those two points. We then calculate the probability of an excess relative to this power law as a function of mass. Our results are robust to the choice of interval width. 
+
+Figure~\ref{fig:m1-excess} shows the inferred excesses relative to a power law (top panels) and the corresponding probabilities of a positive excess (bottom panels), for \oneparpeak (left) and \twoparpeaks (right). We also show the same quantities for the \ac{GWTC-5} \textsc{Default} \ac{BBH} model for comparison.
+
+Near $20\,\Msun$ and $60\,\Msun$, both \PPMixture and \GwinfMixture find suggestive evidence for an excess, with higher probabilities in \twoparpeaks than in \oneparpeak. Near $20\,\Msun$, the probabilities increase from approximately $\textcolor{red}{70\text{--}90\%}$ with \oneparpeak to $\textcolor{red}{80\text{--}95\%}$ with \twoparpeaks. Similarly, near $60\,\Msun$, they increase from approximately $\textcolor{red}{75\%}$ ($\textcolor{red}{70\%}$) to $\textcolor{red}{80\%}$ ($\textcolor{red}{90\%}$) for \PPMixture (\GwinfMixture). In contrast, the \ac{GWTC-5} \textsc{Default} \ac{BBH} model shows no support for an excess in either region. The higher probabilities for an excess with \twoparpeaks may reflect the additional freedom of the continuum to describe these features when the structure near $35\,\Msun$ is modeled parametrically. 
+
+Near $30$--$35\,\Msun$, both mixture models find probabilities of a positive excess close to $\textcolor{red}{100\%}$ in both variants, including \twoparpeaks, where the evidence for a local maximum in Fig.~\ref{fig:m1-derivative} is weaker. The \ac{GWTC-5} \textsc{Default} \ac{BBH} model confidently recovers an excess in this region. Although the nature of this feature remains uncertain, our results confirm the presence of additional structure at this mass scale, in agreement with previous studies~\citep[e.g.,][]{Talbot:2018cva, LIGOScientific:2018jsj, LIGOScientific:2020kqk, KAGRA:2021duu, Farah:2023vsc,Roy:2025ktr, Sridhar:2025kvi,LIGOScientific:2026ctl,Ray:2026uur}.
 
 \section{Other plots and corner plots}
 
